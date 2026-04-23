@@ -87,10 +87,10 @@ flowchart TB
     UI -->|"Search & Manage"| API
     API -->|"HTTP Requests"| API_Server
 
-    style ST fill:#f9f,stroke:#333
-    style CLIP fill:#f9f,stroke:#333
-    style API_Server fill:#bbf,stroke:#333
-    style InMemoryIndex fill:#bfb,stroke:#333
+    style ST fill:#f9f,stroke:#333,color:#000
+    style CLIP fill:#f9f,stroke:#333,color:#000
+    style API_Server fill:#bbf,stroke:#333,color:#000
+    style InMemoryIndex fill:#bfb,stroke:#333,color:#000
 ```
 
 ## Features
