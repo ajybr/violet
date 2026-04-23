@@ -1,0 +1,104 @@
+
+import ClientBox from "./ClientBox"
+
+<ClientBox>
+
+# cURL Commands for vectorDB Backend Demonstration
+
+This document outlines the `curl` commands used to demonstrate the `vectorDB` backend's functionalities, including collection management and embedding operations.
+
+## 1. List All Collections
+
+**Functionality:** Retrieves a list of all collection names currently stored in the database.
+
+```bash
+curl -X GET http://localhost:8000/collections
+```
+
+## 2. Create a New Collection
+
+**Functionality:** Creates a new collection with a specified vector dimension and distance metric.
+
+```bash
+curl -X PUT http://localhost:8000/collections/demo_collection \
+  -H "Content-Type: application/json" \
+  -d
+    {
+          "dimension": 4,
+          "distance": "cosine"
+        }
+```
+
+## 3. Insert Embeddings into a Collection
+
+**Functionality:** Inserts a single embedding (identified by `id`, `vector`, and optional `metadata`) into the specified collection.
+
+### Example for `embedding_1`:
+
+```bash
+curl -X POST http://localhost:8000/collections/demo_collection/insert \
+  -H "Content-Type: application/json" \
+  -d
+    {
+          "id": "embedding_1",
+          "vector": [0.1, 0.2, 0.3, 0.4],
+          "metadata": { "source": "A" }
+        }
+```
+
+### Example for `embedding_2`:
+
+```bash
+curl -X POST http://localhost:8000/collections/demo_collection/insert \
+  -H "Content-Type: application/json" \
+  -d
+    {
+          "id": "embedding_2",
+          "vector": [0.9, 0.8, 0.7, 0.6],
+          "metadata": { "source": "B" }
+        }
+```
+
+### Example for `embedding_3`:
+
+```bash
+curl -X POST http://localhost:8000/collections/demo_collection/insert \
+  -H "Content-Type: application/json" \
+  -d
+    {
+          "id": "embedding_3",
+          "vector": [0.11, 0.22, 0.33, 0.44],
+          "metadata": { "source": "C" }
+        }
+```
+
+## 4. Query for Similar Embeddings in a Collection
+
+**Functionality:** Performs a similarity search within the specified collection using a provided `query` vector and returns the top `k` most similar embeddings.
+
+```bash
+curl -X POST http://localhost:8000/collections/demo_collection \
+  -H "Content-Type: application/json" \
+  -d
+    {
+          "query": [0.1, 0.2, 0.3, 0.4],
+          "k": 2
+        }
+```
+
+## 5. Get Information About a Specific Collection
+
+**Functionality:** Retrieves detailed information about a specific collection, including its name, dimension, distance metric, number of embeddings, and creation timestamp.
+
+```bash
+curl -X GET http://localhost:8000/collections/demo_collection
+```
+
+## 6. Delete a Collection
+
+**Functionality:** Deletes the specified collection and all its associated embeddings from the database.
+
+```bash
+curl -X DELETE http://localhost:8000/collections/demo_collection
+```
+</ClientBox>
